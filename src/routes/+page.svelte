@@ -43,10 +43,6 @@
 	function copyResults() {
 		navigator.clipboard.writeText(JSON.stringify(owners));
 	}
-	function copyUniqueResults() {
-		navigator.clipboard.writeText(JSON.stringify(unique));
-	}
-
 	function saveJSON() {
 		const blob = new Blob([JSON.stringify(owners)], { type: 'application/json' });
 		const url = URL.createObjectURL(blob);
@@ -55,10 +51,8 @@
 		a.download = 'data.json';
 		a.click();
 	}
-
 	function saveCSV() {
-		// Convert JSON to CSV logic here
-		const csvContent = 'data:text/csv;charset=utf-8,' + 'Your CSV Content';
+		const csvContent = 'data:text/csv;charset=utf-8,' + owners;
 		const encodedUri = encodeURI(csvContent);
 		const link = document.createElement('a');
 		link.setAttribute('href', encodedUri);
