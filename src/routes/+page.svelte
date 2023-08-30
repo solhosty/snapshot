@@ -21,20 +21,19 @@
 		submitted.set(true);
 		notSubmitted.set(true);
 		const { results, unique } = await collection(address);
-		if(sendUniqueOwners === true) {
-			owners = unique;
-
-		} else if(sendUniqueOwners === false) {
-			owners = results;
-
-		}
 		result = results
 		uniques = unique;
 		submitted.set(false);
 	}
-	$: results = owners;
+	$: {
+	  if(sendUniqueOwners === true) {
+		owners = unique;
+	  } else if(sendUniqueOwners === false) {
+		owners = result
+	  }
+	}
 	$: resultLength = result.length;
-	$: uniques = uniques.length;
+	$: uniquesLength = uniques.length;
 	$: unique = uniques;
 	$: metadataHTML = formatHighlight(JSON.stringify(owners || {}, null, 2), {
 		keyColor: '#a5a3a3',
@@ -87,10 +86,7 @@
 				>Submit</button
 			>
 		</div>
-	{#if resultLength === 0}
-			<p class="label-text my-2">Unique Owners</p> 
-			<input type="checkbox" class="toggle" bind:checked={sendUniqueOwners} />
-			{/if}
+	
 		{#if resultLength > 0}
 			<div class="stats bg-transparent text-white stats-verticallg:stats-horizontal shadow">
 				<div class="stat">
@@ -100,7 +96,7 @@
 				
 				<div class="stat">
 				  <div class="stat-title text-gray-300">Unique Owners</div>
-				  <div class="stat-value">{uniques}</div>
+				  <div class="stat-value">{uniquesLength}</div>
 				</div>
 			  </div>
 		{/if}
@@ -108,6 +104,10 @@
 		{#if $submitted}
 			<img class="w-1/2 md:w-1/6 m-auto" src="/spinner.svg" alt="" />
 		{/if}
+		{#if resultLength > 0}
+			<p class="label-text my-2 text-gray-300">Unique Owners</p> 
+			<input type="checkbox" class="toggle" bind:checked={sendUniqueOwners} />
+			{/if}
 
 		{#if !$submitted && $notSubmitted && resultLength > 0}
 			<div>
