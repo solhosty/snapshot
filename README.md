@@ -1,3 +1,7 @@
+### SNAPSHOT
+View collection owners on Solana by inputting the collection ID. This will cover compressed and regular NFT collections.
+![Alt text](image.png)
+
 # create-svelte
 
 Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).
@@ -36,6 +40,3 @@ npm run build
 You can preview the production build with `npm run preview`.
 
 > To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
-
-# sveltekit-daisy
-# snapshot

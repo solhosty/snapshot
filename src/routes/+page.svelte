@@ -114,7 +114,7 @@
 				<div
 					class="relative bg-black rounded p-4 flex flex-col overflow-y-auto text-white max-h-[300px]"
 				>
-				<div class="code text-xs whitespace-pre overflow-x-hidden px-3 col-span-12">
+				<div class="code text-xs whitespace-pre overflow-x-hidden px-3 col-span-12 hide-scrollbar">
 					<pre><code class="text-xs">{@html metadataHTML}</code></pre>
 				</div>
                         
@@ -143,3 +143,13 @@
 		{/if}
 	</div>
 </div>
+
+<style>
+	.hide-scrollbar {
+  scrollbar-width: none; /* Firefox */
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  width: 0px; /* Webkit */
+}
+</style>
