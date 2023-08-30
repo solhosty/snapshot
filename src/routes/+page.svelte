@@ -13,15 +13,18 @@
 	 */
 	let assetList = [];
 	let results;
+	let uniques = []
 	async function fetchData() {
 		submitted.set(true)
 		notSubmitted.set(true)
-		results = await collection(address);
+		const {results, unique} = await collection(address);
 		owners = results
+		uniques = unique
 		submitted.set(false)
 	}
 	$: totalCount = owners.length;
 	$: results = owners
+	$: uniques = uniques.length
 	$: metadataHTML = formatHighlight(JSON.stringify(owners || {}, null, 2), {
 		keyColor: '#a5a3a3',
 		numberColor: '#e8a034',
@@ -59,15 +62,15 @@
 				type="text"
 				placeholder="Enter collection address"
 				bind:value={address}
-				class="input text-white rounded p-2 w-full lg:w-full md:w-auto mb-2 md:mb-0 md:mr-2"
+				class="input input-bordered text-white bg-transparent rounded p-2 w-full lg:w-full md:w-auto mb-2 md:mb-0 md:mr-2"
 			/>
-			<button on:click={fetchData} class="btn text-white rounded p-2 w-full md:w-auto">Submit</button>
+			<button on:click={fetchData} class="btn btn-bordered text-white rounded bg-transparent p-2 w-full md:w-auto">Submit</button>
 		</div>
 		
 		{#if totalCount > 0}
-			<span class="ml-4 text-white">
-				Total Owners: {totalCount}
-			</span>
+			<p class="ml-4 text-white">
+				Total Owners: {totalCount} Unique Owners: {uniques}
+			</p>
 		{/if}
 		
 		{#if $submitted}
@@ -90,8 +93,8 @@
 			</div>
 
 			<div class="flex flex-col m-auto justify-center md:flex-row mt-4">
-				<button on:click={saveJSON} class="btn text-white rounded p-2 mb-2 md:mb-0 md:mr-2">Save as JSON</button>
-				<button on:click={saveCSV} class="btn text-white rounded p-2">Save as CSV</button>
+				<button on:click={saveJSON} class="btn btn-bordered bg-transparent text-white rounded p-2 mb-2 md:mb-0 md:mr-2">Save as JSON</button>
+				<button on:click={saveCSV} class="btn btn-bordered bg-transparent text-white rounded p-2">Save as CSV</button>
 			</div>
 
 		</div>
