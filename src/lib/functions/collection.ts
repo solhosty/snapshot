@@ -10,7 +10,7 @@ export async function collection(address: string) {
         let results = [];
         let totalCount: any;
 		while (paginate) {
-			const url = `https://rpc.helius.xyz/?api-key=0dcc9598-3e99-4369-964b-91b31c60ac04`;
+			const url = `https://rpc-proxy.hunter-b16.workers.dev/`;
 			const response = await fetch(url, {
 				method: 'POST',
 				headers: {
